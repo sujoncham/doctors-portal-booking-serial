@@ -1,13 +1,13 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import Footer from './Components/Footer/Footer';
-import Header from './Components/Header/Header';
 import About from './Components/Pages/About';
 import Appointment from './Components/Pages/Appointment';
+import Login from './Components/Pages/AuthenticateUser/Login';
 import Contact from './Components/Pages/Contact';
 import Home from './Components/Pages/Home';
-import Login from './Components/Pages/Login';
 import Reviews from './Components/Pages/Reviews';
+import Footer from './Components/Shared/Footer/Footer';
+import Header from './Components/Shared/Header/Header';
 
 
 function App() {
