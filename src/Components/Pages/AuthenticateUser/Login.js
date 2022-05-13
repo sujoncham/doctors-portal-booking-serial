@@ -1,7 +1,7 @@
 import React from "react";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import auth from "../../../Firebase/Firebase.init";
 import LoadingSpinner from "../../Shared/LoadingSpinner";
 import SocialLogin from "./SocialLogin";
@@ -9,6 +9,7 @@ import SocialLogin from "./SocialLogin";
 const Login = () => {
   const [signInWithEmailAndPassword, user, loading, error,] = useSignInWithEmailAndPassword(auth);
   const { register, formState: { errors }, handleSubmit } = useForm();
+  const navigate = useNavigate();
 
   let signError;
   if (error) {
@@ -18,7 +19,7 @@ const Login = () => {
     return <LoadingSpinner></LoadingSpinner>;
   }
   if (user) {
-    console.log(user);
+    navigate('/')
   }
 
   const onSubmit = data => {
@@ -90,7 +91,7 @@ const Login = () => {
             </div>
           
         </form>
-        <p>New at Doctors Portal? <Link className="text-primary" to='/'>create account</Link> </p>
+        <p>New to Doctors Portal? <Link className="text-primary" to='/register'>create account</Link> </p>
         <div className="divider">OR</div>
         <SocialLogin></SocialLogin>
 

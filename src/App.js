@@ -3,6 +3,7 @@ import './App.css';
 import About from './Components/Pages/About';
 import Appointment from './Components/Pages/Appointment';
 import Login from './Components/Pages/AuthenticateUser/Login';
+import Register from './Components/Pages/AuthenticateUser/Register';
 import Contact from './Components/Pages/Contact';
 import Home from './Components/Pages/Home';
 import Reviews from './Components/Pages/Reviews';
@@ -21,6 +22,7 @@ function App() {
         <Route path='/reviews' element={<Reviews></Reviews>}></Route>
         <Route path='/contact' element={<Contact></Contact>}></Route>
         <Route path='/login' element={<Login></Login>}></Route>
+        <Route path='/register' element={<Register></Register>}></Route>
       </Routes>
       
       <Footer></Footer>
