@@ -19,7 +19,7 @@ const DoctorList = ({ date, setDate }) => {
       </h3>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 mt-20 px-20 mb-20 text-white">
         {booked.map((book) => <AppointmentService
-         key={book.id}
+         key={book._id}
           book={book}
           setTreatment={setTreatment}
           date={date}

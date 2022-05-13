@@ -1,11 +1,15 @@
 import { format } from "date-fns";
 import React from "react";
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from '../../../Firebase/Firebase.init';
 
 const BookingModal = ({ treatment, date }) => {
-  const { title, slots } = treatment;
+  const [user] = useAuthState(auth);
+  const {_id, title, slots } = treatment;
 
-    const handleSubmitBooking = () =>{
-        
+    const handleSubmitBooking = (event) =>{
+        event.preventDefault();
+        console.log('submitted');
     }
 
   return (
@@ -19,7 +23,7 @@ const BookingModal = ({ treatment, date }) => {
           >
             ✕
           </label>
-          <h3 className="text-primary px-8">Booking for: {title}</h3>
+          <h3 className="text-primary px-8">Booking for: {title} {_id}</h3>
           <form onSubmit={handleSubmitBooking}>
             <div className="card-body">
               <div className="form-control">
@@ -35,7 +39,7 @@ const BookingModal = ({ treatment, date }) => {
               </div>
               <select name="timeSlot" className="select select-bordered w-full max-w-xs">
                   {
-                      slots.map(slot => <option value={slot}>{slot}</option>)
+                      slots.map((slot, index) => <option key={index} value={slot}>{slot}</option>)
                   }
               </select>
               <div className="form-control">
@@ -44,7 +48,8 @@ const BookingModal = ({ treatment, date }) => {
                 </label>
                 <input
                   type="text"
-                  placeholder="enter name"
+                  value={user?.displayName || ''}
+                  readOnly
                   className="input input-bordered"
                 />
               </div>
@@ -64,7 +69,7 @@ const BookingModal = ({ treatment, date }) => {
                 </label>
                 <input
                   type="text"
-                  placeholder="email"
+                  value={user?.email || ''}
                   className="input input-bordered"
                 />
               </div>

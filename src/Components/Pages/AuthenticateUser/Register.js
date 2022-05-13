@@ -1,5 +1,8 @@
 import React from "react";
-import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
+import {
+  useCreateUserWithEmailAndPassword,
+  useUpdateProfile
+} from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import auth from "../../../Firebase/Firebase.init";
@@ -15,12 +18,13 @@ const Register = () => {
   const navigate = useNavigate();
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
+  const [updateProfile, updating, updateError] = useUpdateProfile(auth);
 
   let signError;
-  if (error) {
+  if (error || updateError) {
     signError = <p className="text-red-500">Error: {error?.message}</p>;
   }
-  if (loading) {
+  if (loading || updating) {
     return <LoadingSpinner></LoadingSpinner>;
   }
   if (user) {
@@ -28,9 +32,10 @@ const Register = () => {
     navigate("/");
   }
 
-  const onSubmit = (data) => {
+  const onSubmit = async(data) => {
     console.log(data);
-    createUserWithEmailAndPassword(data.email, data.password, data.name);
+    await createUserWithEmailAndPassword(data.email, data.password);
+    await updateProfile({ displayName:data.name });
   };
 
   return (
