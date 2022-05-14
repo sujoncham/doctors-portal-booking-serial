@@ -1,16 +1,18 @@
+import { format } from "date-fns";
 import React, { useEffect, useState } from "react";
 import AppointmentService from "./AppointmentService";
 import BookingModal from "./BookingModal";
 
-const DoctorList = ({ date, setDate }) => {
+const DoctorList = ({ date }) => {
   const [booked, setBooked] = useState([]);
   const [treatment, setTreatment] = useState(null);
 
+  const formatDate = format(date, 'PP');
   useEffect(() => {
-    fetch("http://localhost:5000/booking")
+    fetch(`http://localhost:5000/available?date=${formatDate}`)
       .then((res) => res.json())
       .then((data) => setBooked(data));
-  }, []);
+  }, [formatDate]);
 
   return (
     <div className="appoint-available">

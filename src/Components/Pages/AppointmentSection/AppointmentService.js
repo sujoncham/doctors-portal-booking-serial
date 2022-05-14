@@ -2,7 +2,7 @@ import { format } from 'date-fns';
 import React from 'react';
 
 const AppointmentService = ({book, date, setTreatment}) => {
-    const {_id, title, slots} = book;
+    const {title, slots} = book;
     return (
         <div className="card w-96 shadow-xl bg-primary mb-20">
             <div className="card-body items-center text-center">
@@ -26,7 +26,7 @@ const AppointmentService = ({book, date, setTreatment}) => {
                   htmlFor="booking-modal"
                   disabled={slots.length === 0}
                   className="btn btn-sm btn-accent"
-                  onClick={()=>setTreatment(book, _id)}
+                  onClick={()=>setTreatment(book)}
                 >
                   Book Appointment
                 </label>

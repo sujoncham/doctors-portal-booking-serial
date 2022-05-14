@@ -1,13 +1,15 @@
 import React, { useEffect } from "react";
-import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import auth from "../../../Firebase/Firebase.init";
 import LoadingSpinner from "../../Shared/LoadingSpinner";
 import SocialLogin from "./SocialLogin";
 
 const Login = () => {
   const [signInWithEmailAndPassword, user, loading, error,] = useSignInWithEmailAndPassword(auth);
+  const [sendPasswordResetEmail, sending, resetError] = useSendPasswordResetEmail(auth);
   const { register, formState: { errors }, handleSubmit } = useForm();
   const navigate = useNavigate();
   const location = useLocation();
@@ -15,22 +17,33 @@ const Login = () => {
   
   useEffect(()=>{
     if (user) {
+      console.log(user);
       navigate(from, { replace: true });
     }
   }, [user, from, navigate]);
 
   let signError;
-  if (error) {
-    signError = <p className="text-red-500">Error: {error?.message}</p>;
+  if (error || resetError) {
+    signError = <p className="text-red-500">Error: {error?.message} {resetError?.message}</p>;
   }
 
-  if (loading) {
+  if (loading || sending) {
     return <LoadingSpinner></LoadingSpinner>;
   }
 
   const onSubmit = data => {
     signInWithEmailAndPassword(data.email, data.password);
   };
+
+  const handleResetPassword = async(event)=>{
+    const email = event.target.email.value;
+    if(email.value){
+      await sendPasswordResetEmail(email);
+      toast('Sent email');
+    } else {
+      toast('Please, enter your mail');
+    }
+  }
  
 
   return (
@@ -87,13 +100,14 @@ const Login = () => {
               {errors.password?.type === 'minLength' && <span className="text-primary">{errors.password?.message}</span>}
             </div>
            
-            <p>Forgot password? <Link className="text-primary" to='/'>reset password</Link></p>
+            
               {signError}
             <div className="form-control mt-6">
               <button type="submit" className="btn btn-primary">Login</button>
             </div>
           
         </form>
+        <p>Forgot password? <button className="btn btn-link" onClick={handleResetPassword}>reset password</button></p>
         <p>New to Doctors Portal? <Link className="text-primary" to='/register'>create account</Link> </p>
         <div className="divider">OR</div>
         <SocialLogin></SocialLogin>
