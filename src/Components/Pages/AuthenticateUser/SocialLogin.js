@@ -2,12 +2,14 @@ import React from "react";
 import { useSignInWithGoogle } from "react-firebase-hooks/auth";
 import { useLocation, useNavigate } from "react-router-dom";
 import auth from "../../../Firebase/Firebase.init";
+import useToken from "../../../hooks/useToken";
 import LoadingSpinner from "../../Shared/LoadingSpinner";
 
 const SocialLogin = () => {
   const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
   const navigate = useNavigate();
   const location = useLocation();
+  const [token] = useToken(user)
   let from = location.state?.from?.pathname || "/";
 
   let signError;
@@ -17,7 +19,7 @@ const SocialLogin = () => {
   if (loading) {
     return <LoadingSpinner></LoadingSpinner>;
   }
-  if (user) {
+  if (token) {
     navigate(from, { replace: true });
   }
   return (

@@ -4,10 +4,12 @@ import {
   useUpdateProfile
 } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../../Firebase/Firebase.init";
+import useToken from "../../../hooks/useToken";
 import LoadingSpinner from "../../Shared/LoadingSpinner";
 import SocialLogin from "./SocialLogin";
+
 
 const Register = () => {
   const {
@@ -15,10 +17,16 @@ const Register = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
+
   const navigate = useNavigate();
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
-const [updateProfile, updating, updateError] = useUpdateProfile(auth, {sendEmailVerification:true});
+  const [updateProfile, updating, updateError] = useUpdateProfile(auth, {
+    sendEmailVerification: true,
+  });
+  const location = useLocation();
+  const [token] = useToken(user);
+  let from = location.state?.from?.pathname || "/";
 
   let signError;
   if (error || updateError) {
@@ -27,15 +35,14 @@ const [updateProfile, updating, updateError] = useUpdateProfile(auth, {sendEmail
   if (loading || updating) {
     return <LoadingSpinner></LoadingSpinner>;
   }
-  if (user) {
-    console.log(user);
-    navigate("/");
+  if (token) {
+    navigate(from, { replace: true });
   }
 
-  const onSubmit = async(data) => {
+  const onSubmit = async (data) => {
     console.log(data);
     await createUserWithEmailAndPassword(data.email, data.password);
-    await updateProfile({ displayName:data.name });
+    await updateProfile({ displayName: data.name });
   };
 
   return (

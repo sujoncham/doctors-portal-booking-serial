@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import auth from "../../../Firebase/Firebase.init";
+import useToken from "../../../hooks/useToken";
 import LoadingSpinner from "../../Shared/LoadingSpinner";
 import SocialLogin from "./SocialLogin";
 
@@ -13,14 +14,14 @@ const Login = () => {
   const { register, formState: { errors }, handleSubmit } = useForm();
   const navigate = useNavigate();
   const location = useLocation();
+  const [token] = useToken(user);
   let from = location.state?.from?.pathname || "/";
   
   useEffect(()=>{
-    if (user) {
-      console.log(user);
+    if (token) {
       navigate(from, { replace: true });
     }
-  }, [user, from, navigate]);
+  }, [token, from, navigate]);
 
   let signError;
   if (error || resetError) {

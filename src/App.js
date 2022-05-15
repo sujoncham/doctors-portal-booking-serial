@@ -8,6 +8,11 @@ import Login from "./Components/Pages/AuthenticateUser/Login";
 import Register from "./Components/Pages/AuthenticateUser/Register";
 import RequireAuth from "./Components/Pages/AuthenticateUser/RequireAuth";
 import Contact from "./Components/Pages/Contact";
+import Dashboard from "./Components/Pages/Dashboard/Dashboard";
+import MyAppointment from "./Components/Pages/Dashboard/MyAppointment";
+import MyHistory from "./Components/Pages/Dashboard/MyHistory";
+import MyReviews from "./Components/Pages/Dashboard/MyReviews";
+import Users from "./Components/Pages/Dashboard/Users";
 import Home from "./Components/Pages/Home";
 import Page404 from "./Components/Pages/Page404";
 import Reviews from "./Components/Pages/Reviews";
@@ -30,6 +35,18 @@ function App() {
           }
         ></Route>
         <Route path="/reviews" element={<Reviews></Reviews>}></Route>
+
+        <Route path="/dashboard" element={
+          <RequireAuth>
+        <Dashboard></Dashboard>
+        </RequireAuth>
+        }>
+          <Route index element={<MyAppointment></MyAppointment>}></Route>
+          <Route path="myReviews" element={<MyReviews></MyReviews>}></Route>
+          <Route path="myHistory" element={<MyHistory></MyHistory>}></Route>
+          <Route path="users" element={<Users></Users>}></Route>
+        </Route>
+
         <Route path="/contact" element={<Contact></Contact>}></Route>
         <Route path="/login" element={<Login></Login>}></Route>
         <Route path="/register" element={<Register></Register>}></Route>

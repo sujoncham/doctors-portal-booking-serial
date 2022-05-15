@@ -23,19 +23,19 @@ const RequireAuth = ({ children }) => {
   }
 
   if(!user.emailVerified){
-    return <div class="flex justify-center items-center mt-28 mb-28">
-    <div class="card w-96 bg-base-100 shadow-xl image-full">
+    return <div className="flex justify-center items-center mt-28 mb-28">
+    <div className="card w-96 bg-base-100 shadow-xl image-full">
     <figure><img src="https://api.lorem.space/image/shoes?w=400&h=225" alt="Shoes" /></figure>
-    <div class="card-body">
-      <h2 class="card-title">Email is not verified</h2>
+    <div className="card-body">
+      <h2 className="card-title">Email is not verified</h2>
       <p>Please, verify your email address?</p>
-      <div class="card-actions justify-center">
+      <div className="card-actions justify-center">
         <button
         onClick={async () => {
           await sendEmailVerification();
           toast('Sent email');
         }}
-         class="btn btn-primary">Send Verification</button>
+        className="btn btn-primary">Send Verification</button>
       </div>
     </div>
   </div>
