@@ -10,10 +10,10 @@ const MyAppointment = () => {
   const navigate = useNavigate();
   useEffect(() => {
     if(user){
-        fetch(`http://localhost:5000/patient?patient=${user?.email}`, {
+        fetch(`http://localhost:5000/patient?patient=${user?.user?.email}`, {
             method: 'GET',
             headers:{
-                'authorization' : `bearer ${localStorage.getItem('accessToken')}`
+              authorization: `Bearer ${localStorage.getItem('accessToken')}`
             }
         })
       .then((res) => {
@@ -29,9 +29,10 @@ const MyAppointment = () => {
         });
     }
   }, [user, navigate]);
+  
   return (
     <div className="overflow-x-auto mb-20 mt-10">
-        <h1 className="text-2xl">My appointment</h1>
+        <h1 className="text-2xl">My appointment : {patients.length}</h1>
       <table className="table w-full">
         <thead>
           <tr>

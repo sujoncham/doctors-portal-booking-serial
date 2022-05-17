@@ -8,6 +8,7 @@ import Login from "./Components/Pages/AuthenticateUser/Login";
 import Register from "./Components/Pages/AuthenticateUser/Register";
 import RequireAuth from "./Components/Pages/AuthenticateUser/RequireAuth";
 import Contact from "./Components/Pages/Contact";
+import AddDoctor from "./Components/Pages/Dashboard/AddDoctor";
 import Dashboard from "./Components/Pages/Dashboard/Dashboard";
 import MyAppointment from "./Components/Pages/Dashboard/MyAppointment";
 import MyHistory from "./Components/Pages/Dashboard/MyHistory";
@@ -45,6 +46,7 @@ function App() {
           <Route path="myReviews" element={<MyReviews></MyReviews>}></Route>
           <Route path="myHistory" element={<MyHistory></MyHistory>}></Route>
           <Route path="users" element={<Users></Users>}></Route>
+          <Route path="addDoctor" element={<AddDoctor></AddDoctor>}></Route>
         </Route>
 
         <Route path="/contact" element={<Contact></Contact>}></Route>

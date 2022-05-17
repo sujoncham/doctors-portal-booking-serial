@@ -4,7 +4,7 @@ import LoadingSpinner from "../../Shared/LoadingSpinner";
 import UserRow from "./UserRow";
 
 const Users = () => {
-  const { data: users, isLoading } = useQuery('users', () =>
+  const {isLoading, data: users } = useQuery('users', () =>
     fetch('http://localhost:5000/user', {
         method: 'GET',
         headers:{
@@ -29,7 +29,7 @@ const Users = () => {
           </tr>
         </thead>
         <tbody>
-          {users.map(user => <UserRow key={user._id} user={user}></UserRow> )}
+          {users.map((user, index) => <UserRow key={index} user={user}></UserRow> )}
         </tbody>
       </table>
     </div>

@@ -1,16 +1,15 @@
 import React from "react";
 
-const UserRow = ({user}) => {
-    const {email} =user;
+const UserRow = ({user, index}) => {
+    const {email} = user;
   return (
     <tr>
-      <th>1</th>
+      <th>01</th>
       <td>{email}</td>
       <td>
-        <button className="btn btn-sm">Make Admin</button>{" "}
+        <button className="btn btn-sm">Make Admin</button>
       </td>
       <td>
-        {" "}
         <button className="btn btn-sm">delete</button>
       </td>
     </tr>

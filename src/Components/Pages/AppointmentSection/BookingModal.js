@@ -12,7 +12,7 @@ const BookingModal = ({ treatment, date, setTreatment, refetch }) => {
   const handleSubmitBooking = (event) => {
     event.preventDefault();
     const slot = event.target.slot.value;
-    const bookData = {
+    const booking = {
       treatmentId: _id,
       treatment: title,
       date: formateDate,
@@ -28,7 +28,7 @@ const BookingModal = ({ treatment, date, setTreatment, refetch }) => {
       headers: {
         "content-type": "application/json"
       },
-      body: JSON.stringify(bookData)
+      body: JSON.stringify(booking)
     })
       .then((res) => res.json())
       .then((data) => {
@@ -38,9 +38,13 @@ const BookingModal = ({ treatment, date, setTreatment, refetch }) => {
         } else{
           toast.error(`Already have an appointment on, ${data.booking?.date} at ${data.booking?.slot}`);
         }
-        refetch()
-        setTreatment(null);
+        
+        refetch();
+        
       });
+      setTreatment(null);
+      
+     
   };
 
   return (
@@ -48,80 +52,26 @@ const BookingModal = ({ treatment, date, setTreatment, refetch }) => {
       <input type="checkbox" id="booking-modal" className="modal-toggle" />
       <div className="modal modal-bottom sm:modal-middle">
         <div className="modal-box">
-          <label
-            htmlFor="booking-modal"
-            className="btn btn-sm btn-circle absolute right-2 top-2"
-          >
-            ✕
-          </label>
-          <h3 className="text-primary px-8">
-            Booking for: {title}
-          </h3>
-          <form onSubmit={handleSubmitBooking}>
-            <div className="card-body">
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Booking Date</span>
-                </label>
-                <input
-                  type="text"
-                  value={format(date, "PP")}
-                  className="input input-bordered"
-                  readOnly
-                  disabled
-                />
-              </div>
-              <select
-              name="slot"
-                className="select select-bordered w-full max-w-xs"
-              >
-                {slots.map((slot, index) => (
-                  <option key={index} value={slot}>
-                    {slot}
-                  </option>
-                ))}
-              </select>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Full Name</span>
-                </label>
-                <input
-                  type="text"
-                  value={user?.displayName || ""}
-                  readOnly
-                  className="input input-bordered"
-                  disabled
-                />
-              </div>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Enter Phone</span>
-                </label>
-                <input
-                  type="text"
-                  name="phone"
-                  placeholder="enter phone"
-                  className="input input-bordered"
-                  autoComplete="nope"
-                />
-              </div>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Email</span>
-                </label>
-                <input
-                  type="text"
-                  value={user?.email || ""}
-                  className="input input-bordered"
-                  readOnly
-                  disabled
-                />
-              </div>
-              
-                  <input type="submit" className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg" value='Booked' />
-         
+          <label htmlFor="booking-modal" className="btn btn-sm btn-circle absolute right-2 top-2" > ✕</label>
+          <h3 className="text-primary px-8">  Booking for: {title} </h3>
 
-            </div>
+          <form onSubmit={handleSubmitBooking} className='grid grid-cols-1 gap-3 justify-items-center mt-2'>
+
+            <input type="text" value={format(date, "PP")}  className="input w-full max-w-xs" readOnly disabled />
+            <select name="slot" className="select select-bordered w-full max-w-xs">
+                  {slots.map((slot, index) => (
+                    <option key={index} value={slot}>
+                      {slot}
+                    </option>
+                  ))}
+                </select>
+            <input type="text" name='name' value={user?.displayName || ""}  className="input w-full max-w-xs" readOnly disabled />
+
+            <input type="text" name="phone" placeholder="Enter phone" className="input w-full max-w-xs" autoComplete="nope" />
+
+            <input type="text" name='email' value={user?.email || ""} className="input w-full max-w-xs" readOnly disabled />
+            <input type="submit" value='Booked' className="btn btn-primary w-full max-w-xs" />
+            
           </form>
         </div>
       </div>

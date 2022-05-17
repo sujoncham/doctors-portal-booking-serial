@@ -5,11 +5,11 @@ import LoadingSpinner from "../../Shared/LoadingSpinner";
 import AppointmentService from "./AppointmentService";
 import BookingModal from "./BookingModal";
 
-const DoctorList = ({ date }) => {
+const AvailableAppointment = ({ date }) => {
   const [treatment, setTreatment] = useState(null);
   const formatDate = format(date, 'PP');
 
-  const {isLoading, data:booked, refetch} = useQuery(['available', formatDate], ()=>fetch(`http://localhost:5000/available?date=${formatDate}`)
+  const {isLoading, data:services, refetch} = useQuery(['available', formatDate], ()=>fetch(`http://localhost:5000/available?date=${formatDate}`)
       .then((res) => res.json()))
 
       if (isLoading) {
@@ -20,20 +20,19 @@ const DoctorList = ({ date }) => {
   return (
     <div className="appoint-available">
       <h3 className="px-20 text-center text-3xl text-primary">
-        Appointment Date Available:{format(date, 'PP')}
+        Appointments Date Available: {format(date, 'PP')}
       </h3>
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 mt-20 px-20 mb-20 text-white">
-        {booked.map((book) => <AppointmentService
-         key={book._id}
-          book={book}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-20 px-20 mb-20 text-white">
+        {services?.map((service) => <AppointmentService
+         key={service._id}
+         service={service}
           setTreatment={setTreatment}
           date={date}
-          refetch={refetch}
           ></AppointmentService>)}
       </div>
-      {treatment && <BookingModal date={date} treatment={treatment}></BookingModal>}
+      {treatment && <BookingModal date={date} refetch={refetch} setTreatment={setTreatment} treatment={treatment}></BookingModal>}
     </div>
   );
 };
 
-export default DoctorList;
+export default AvailableAppointment;

@@ -6,10 +6,10 @@ import useToken from "../../../hooks/useToken";
 import LoadingSpinner from "../../Shared/LoadingSpinner";
 
 const SocialLogin = () => {
-  const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
+  const [signInWithGoogle, gUser, loading, error] = useSignInWithGoogle(auth);
   const navigate = useNavigate();
   const location = useLocation();
-  const [token] = useToken(user)
+  const [token] = useToken(gUser)
   let from = location.state?.from?.pathname || "/";
 
   let signError;

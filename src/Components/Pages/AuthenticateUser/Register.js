@@ -4,7 +4,7 @@ import {
   useUpdateProfile
 } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import auth from "../../../Firebase/Firebase.init";
 import useToken from "../../../hooks/useToken";
 import LoadingSpinner from "../../Shared/LoadingSpinner";
@@ -24,9 +24,9 @@ const Register = () => {
   const [updateProfile, updating, updateError] = useUpdateProfile(auth, {
     sendEmailVerification: true,
   });
-  const location = useLocation();
+  // const location = useLocation();
   const [token] = useToken(user);
-  let from = location.state?.from?.pathname || "/";
+  // let from = location.state?.from?.pathname || "/";
 
   let signError;
   if (error || updateError) {
@@ -36,11 +36,10 @@ const Register = () => {
     return <LoadingSpinner></LoadingSpinner>;
   }
   if (token) {
-    navigate(from, { replace: true });
+    navigate('/');
   }
 
   const onSubmit = async (data) => {
-    console.log(data);
     await createUserWithEmailAndPassword(data.email, data.password);
     await updateProfile({ displayName: data.name });
   };

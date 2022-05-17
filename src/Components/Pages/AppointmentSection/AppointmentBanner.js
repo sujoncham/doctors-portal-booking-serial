@@ -4,7 +4,7 @@ import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import Chair from '../../../assets/images/chair.png';
 
-const AppointBanner = ({date, setDate}) => {
+const AppointmentBanner = ({date, setDate}) => {
   
   // let footer = <p>Please pick a day.</p>;
   // if (selected) {
@@ -28,4 +28,4 @@ const AppointBanner = ({date, setDate}) => {
   );
 };
 
-export default AppointBanner;
+export default AppointmentBanner;
