@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import auth from "../../../Firebase/Firebase.init";
 
 const BookingModal = ({ treatment, date, setTreatment, refetch }) => {
-  const { _id, title, slots } = treatment;
+  const { _id, title, slots, price } = treatment;
   const [user] = useAuthState(auth);
   const formateDate = format(date, "PP");
 
@@ -17,8 +17,9 @@ const BookingModal = ({ treatment, date, setTreatment, refetch }) => {
       treatment: title,
       date: formateDate,
       slot,
-      patient: user.email,
-      patientName: user.displayName,
+      price,
+      patient: user?.email,
+      patientName: user?.displayName,
       phone: event.target.phone.value,
     };
 
@@ -53,7 +54,7 @@ const BookingModal = ({ treatment, date, setTreatment, refetch }) => {
       <div className="modal modal-bottom sm:modal-middle">
         <div className="modal-box">
           <label htmlFor="booking-modal" className="btn btn-sm btn-circle absolute right-2 top-2" > ✕</label>
-          <h3 className="text-primary px-8">  Booking for: {title} </h3>
+          <h3 className="text-primary text-xl text-center px-8">  Booking for: {title} </h3>
 
           <form onSubmit={handleSubmitBooking} className='grid grid-cols-1 gap-3 justify-items-center mt-2'>
 
@@ -66,10 +67,10 @@ const BookingModal = ({ treatment, date, setTreatment, refetch }) => {
                   ))}
                 </select>
             <input type="text" name='name' value={user?.displayName || ""}  className="input w-full max-w-xs" readOnly disabled />
-
-            <input type="text" name="phone" placeholder="Enter phone" className="input w-full max-w-xs" autoComplete="nope" />
-
             <input type="text" name='email' value={user?.email || ""} className="input w-full max-w-xs" readOnly disabled />
+            
+            <input type="text" name="phone" placeholder="Enter phone" className="input input-bordered w-full max-w-xs" autoComplete="nope" />
+
             <input type="submit" value='Booked' className="btn btn-primary w-full max-w-xs" />
             
           </form>

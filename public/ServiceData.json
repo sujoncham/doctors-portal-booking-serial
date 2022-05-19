@@ -2,6 +2,7 @@
   {
     "id": 1,
     "title": "Teeth Orthodontics",
+    "price": 100,
     "slots": [
       "08.00AM - 08.30AM",
       "08.30AM - 09.00AM",
@@ -23,6 +24,7 @@
   {
     "id": 2,
     "title": "Cosmetic Dentistry",
+    "price": 100,
     "slots": [
       "08.00AM - 08.30AM",
       "08.30AM - 09.00AM",
@@ -44,6 +46,7 @@
   {
     "id": 3,
     "title": "Teeth Cleaning",
+    "price": 100,
     "slots": [
       "08.00AM - 08.30AM",
       "08.30AM - 09.00AM",
@@ -65,6 +68,7 @@
   {
     "id": 4,
     "title": "Cavity Destistry",
+    "price": 100,
     "slots": [
       "08.00AM - 08.30AM",
       "08.30AM - 09.00AM",
@@ -86,6 +90,7 @@
   {
     "id": 5,
     "title": "Pediatric Dental",
+    "price": 100,
     "slots": [
       "08.00AM - 08.30AM",
       "08.30AM - 09.00AM",
@@ -107,6 +112,7 @@
   {
     "id": 6,
     "title": "Oral Sergery",
+    "price": 100,
     "slots": [
       "08.00AM - 08.30AM",
       "08.30AM - 09.00AM",

@@ -1,20 +1,20 @@
 import React, { useEffect } from "react";
-import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import { useSendPasswordResetEmail, useSignInWithEmailAndPassword, useSignInWithGoogle } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import auth from "../../../Firebase/Firebase.init";
 import useToken from "../../../hooks/useToken";
 import LoadingSpinner from "../../Shared/LoadingSpinner";
-import SocialLogin from "./SocialLogin";
 
 const Login = () => {
   const [signInWithEmailAndPassword, user, loading, error,] = useSignInWithEmailAndPassword(auth);
   const [sendPasswordResetEmail, sending, resetError] = useSendPasswordResetEmail(auth);
   const { register, formState: { errors }, handleSubmit } = useForm();
+  const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
   const navigate = useNavigate();
   const location = useLocation();
-  const [token] = useToken(user);
+  const [token] = useToken(user || gUser);
   let from = location.state?.from?.pathname || "/";
   
   useEffect(()=>{
@@ -24,11 +24,11 @@ const Login = () => {
   }, [token, from, navigate]);
 
   let signError;
-  if (error || resetError) {
+  if (error || resetError || gError) {
     signError = <p className="text-red-500">Error: {error?.message} {resetError?.message}</p>;
   }
 
-  if (loading || sending) {
+  if (loading || sending || gLoading) {
     return <LoadingSpinner></LoadingSpinner>;
   }
 
@@ -111,7 +111,11 @@ const Login = () => {
         <p>Forgot password? <button className="btn btn-link" onClick={handleResetPassword}>reset password</button></p>
         <p>New to Doctors Portal? <Link className="text-primary" to='/register'>create account</Link> </p>
         <div className="divider">OR</div>
-        <SocialLogin></SocialLogin>
+        <div className="flex justify-center items-center">
+          <button onClick={() => signInWithGoogle()} className="btn btn-primary">
+              Sign in with Google
+          </button>
+        </div>
 
         </div>
       </div>

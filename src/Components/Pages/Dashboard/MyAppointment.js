@@ -1,16 +1,19 @@
 import { signOut } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import auth from "../../../Firebase/Firebase.init";
 
 const MyAppointment = () => {
-  const [patients, setPatients] = useState([]);
+  
   const [user] = useAuthState(auth);
+  const [patients, setPatients] = useState([]);
+
+
   const navigate = useNavigate();
   useEffect(() => {
     if(user){
-        fetch(`http://localhost:5000/patient?patient=${user?.user?.email}`, {
+        fetch(`http://localhost:5000/booking?patient=${user?.email}`, {
             method: 'GET',
             headers:{
               authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -42,17 +45,22 @@ const MyAppointment = () => {
             <th>Date</th>
             <th>Time</th>
             <th>Service</th>
+            <th>Payment</th>
           </tr>
         </thead>
         <tbody>
           {patients.map((patient, index) => (
-            <tr key={index} patient={patient}>
+            <tr>
               <th>{index + 1}</th>
               <td>{patient.patientName}</td>
               <td>{patient.patient}</td>
               <td>{patient.date}</td>
               <td>{patient.slot}</td>
               <td>{patient.treatment}</td>
+              <td>
+                {(patient.price && !patient.paid) && <Link to={`/dashboard/payment/${patient._id}`}>Pay</Link>}
+                {(patient.price && patient.paid) && <span className="text-success">paid</span>}
+              </td>
             </tr>
           ))}
         </tbody>

@@ -2,7 +2,7 @@ import { format } from 'date-fns';
 import React from 'react';
 
 const AppointmentService = ({service, date, setTreatment}) => {
-    const {title, slots} = service;
+    const {title, slots, price} = service;
     return (
         <div className="card  lg:max-w-lg shadow-xl bg-primary mb-20">
             <div className="card-body items-center text-center">
@@ -17,10 +17,12 @@ const AppointmentService = ({service, date, setTreatment}) => {
                   </span>
                 }
               </p>
+
               <p>
                 {slots.length} {slots.length > 1 ? "spaces" : "space"}{" "}
                 available
               </p>
+              <p>Visit: ${price}</p>
               <div className="card-actions">
                 <label
                   htmlFor="booking-modal"

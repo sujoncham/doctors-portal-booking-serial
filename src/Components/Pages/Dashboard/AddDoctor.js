@@ -56,7 +56,7 @@ const AddDoctor = () => {
                 })
 
             }
-            console.log('image', result);
+           
         })
 
     }

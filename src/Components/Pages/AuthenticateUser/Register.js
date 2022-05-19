@@ -1,6 +1,7 @@
 import React from "react";
 import {
   useCreateUserWithEmailAndPassword,
+  useSignInWithGoogle,
   useUpdateProfile
 } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
@@ -8,15 +9,11 @@ import { Link, useNavigate } from "react-router-dom";
 import auth from "../../../Firebase/Firebase.init";
 import useToken from "../../../hooks/useToken";
 import LoadingSpinner from "../../Shared/LoadingSpinner";
-import SocialLogin from "./SocialLogin";
 
 
 const Register = () => {
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-  } = useForm();
+  const { register, formState: { errors }, handleSubmit} = useForm();
+  const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
 
   const navigate = useNavigate();
   const [createUserWithEmailAndPassword, user, loading, error] =
@@ -25,14 +22,14 @@ const Register = () => {
     sendEmailVerification: true,
   });
   // const location = useLocation();
-  const [token] = useToken(user);
+  const [token] = useToken(user || gUser);
   // let from = location.state?.from?.pathname || "/";
 
   let signError;
-  if (error || updateError) {
+  if (error || updateError || gError) {
     signError = <p className="text-red-500">Error: {error?.message}</p>;
   }
-  if (loading || updating) {
+  if (loading || updating || gLoading) {
     return <LoadingSpinner></LoadingSpinner>;
   }
   if (token) {
@@ -154,7 +151,11 @@ const Register = () => {
             here{" "}
           </p>
           <div className="divider">OR</div>
-          <SocialLogin></SocialLogin>
+          <div className="flex justify-center items-center">
+          <button onClick={() => signInWithGoogle()} className="btn btn-primary">
+              Sign in with Google
+          </button>
+        </div>
         </div>
       </div>
     </div>
