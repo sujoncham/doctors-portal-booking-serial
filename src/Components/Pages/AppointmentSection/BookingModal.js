@@ -1,5 +1,4 @@
 import { format } from "date-fns";
-import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
 import auth from "../../../Firebase/Firebase.init";
@@ -23,7 +22,7 @@ const BookingModal = ({ treatment, date, setTreatment, refetch }) => {
       phone: event.target.phone.value,
     };
 
-    const url = `http://localhost:5000/booking`;
+    const url = `https://doctors-portal-server-7ten.vercel.app/booking`;
     fetch(url, {
       method: "POST",
       headers: {
@@ -44,8 +43,6 @@ const BookingModal = ({ treatment, date, setTreatment, refetch }) => {
         
       });
       setTreatment(null);
-      
-     
   };
 
   return (

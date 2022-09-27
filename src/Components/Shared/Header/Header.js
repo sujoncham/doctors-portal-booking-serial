@@ -24,8 +24,10 @@ const Header = () => {
         <Link to="/appointment">Appointment</Link>
       </li>
       <li>
+        <Link to="/myPatient">MyPatient</Link>
+      </li>
+      <li>
         <Link to="/reviews">Reviews</Link>
-        
       </li>
       <li>
         <Link to="/contact">Contact</Link>
@@ -34,24 +36,11 @@ const Header = () => {
         <Link to="/dashboard">DashBoard</Link>
       </li>
       }
-      {user?.displayName && (
-        <li className="text-red-500 mt-3">{user?.displayName.slice(0,6)}</li>
-      )}
-      {user ? (
-        <li>
-          <button className="btn btn-link" onClick={handleSignOut}>
-            SignOut
-          </button>
-        </li>
-      ) : (
-        <li>
-          <Link to="/login">Login</Link>
-        </li>
-      )}
+      
     </>
   );
   return (
-    <div className="navbar">
+    <div className="navbar shadow-md sticky z-40 top-0 bg-slate-400">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex="0" className="btn btn-ghost lg:hidden">
@@ -92,6 +81,22 @@ const Header = () => {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
         </svg>
         </label>
+        <ul className="flex justify-start gap-1">
+            {user?.displayName && (
+              <li className="text-slate-800 mt-3">{user?.displayName.slice(0,6)}</li>
+            )}
+            {user ? (
+              <li>
+                <span className="btn btn-link text-black" onClick={handleSignOut}>
+                  SignOut
+                </span>
+              </li>
+            ) : (
+              <li>
+                <Link to="/login">Login</Link>
+              </li>
+            )}
+        </ul>
       </div>
     </div>
   );

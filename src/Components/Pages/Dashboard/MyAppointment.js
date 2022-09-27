@@ -13,7 +13,7 @@ const MyAppointment = () => {
   const navigate = useNavigate();
   useEffect(() => {
     if(user){
-        fetch(`http://localhost:5000/booking?patient=${user?.email}`, {
+        fetch(`https://doctors-portal-server-7ten.vercel.app/booking?patient=${user?.email}`, {
             method: 'GET',
             headers:{
               authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -50,7 +50,7 @@ const MyAppointment = () => {
         </thead>
         <tbody>
           {patients.map((patient, index) => (
-            <tr>
+            <tr key={patient._id}>
               <th>{index + 1}</th>
               <td>{patient.patientName}</td>
               <td>{patient.patient}</td>
@@ -58,8 +58,11 @@ const MyAppointment = () => {
               <td>{patient.slot}</td>
               <td>{patient.treatment}</td>
               <td>
-                {(patient.price && !patient.paid) && <Link to={`/dashboard/payment/${patient._id}`}>Pay</Link>}
-                {(patient.price && patient.paid) && <span className="text-success">paid</span>}
+                {(patient.price && !patient.paid) && <Link className="btn btn-primary" to={`/dashboard/payment/${patient._id}`}>Pay</Link>}
+                {(patient.price && patient.paid) && <>
+                  <p className="text-success">paid</p>
+                  <p className="text-success">({patient.transactionId.slice(-4)})</p>
+                </>}
               </td>
             </tr>
           ))}

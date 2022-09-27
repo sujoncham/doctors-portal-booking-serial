@@ -11,7 +11,7 @@ const AppointmentBanner = ({date, setDate}) => {
   //   footer = <p>You picked {format(selected, 'PP')}.</p>;
   // }
   return (
-    <div className="hero min-h-screen mt-5">
+    <div className="hero mt-5 p-10 shadow-md">
       <div className="hero-content flex-col lg:flex-row-reverse">
       <img src={Chair} className="max-w-lg rounded-lg shadow-2xl" alt="" />
         <div>

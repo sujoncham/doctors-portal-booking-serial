@@ -1,46 +1,52 @@
-import React, { useEffect, useState } from 'react';
-import DoctorRow from './DoctorRow';
+import React from 'react';
+import { useQuery } from 'react-query';
+import LoadingSpinner from '../../Shared/LoadingSpinner';
+import DoctorRow from "./DoctorRow";
 
 const ManageDoctors = () => {
-    const [doctors, setDoctors] = useState([]);
-    useEffect(()=>{
-        fetch('http://localhost:5000/doctor', {
-            headers:{
-                authorization: `Bearer ${localStorage.getItem('accessToken')}`
-            }
-        })
-        .then(res=>res.json())
-        .then(data =>setDoctors(data));
-    }, []);
+ 
+    const { data: doctors, isLoading, refetch } = useQuery(['doctors'], () =>
+    fetch('https://doctors-portal-server-7ten.vercel.app/doctor', {
+        method: "GET",
+        headers:{
+            authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        }
+    }).then((res) => res.json()));
 
-   
+  if (isLoading) {
+    return <LoadingSpinner></LoadingSpinner>;
+  }
+
 
     return (
         <div>
             <h1 className='text-2xl'>Manage Doctors : {doctors.length}</h1>
             
-            <div class="overflow-x-auto">
-                <table class="table w-full">
-                    
+            <div className="overflow-x-auto">
+                <table className="table w-full">
                     <thead>
-                    <tr>
-                        <th>Sl.</th>
-                        <th>Picture</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Speciality</th>
-                        <th>Action</th>
-                    </tr>
+                        <tr>
+                            <th>Sl.</th>
+                            <th>Picture</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Speciality</th>
+                            <th>Action</th>
+                        </tr>
                     </thead>
                     <tbody>
                     {
-                        doctors.map((doctor, Index) => <DoctorRow key={Index} doctor={doctor} setDoctors={setDoctors}></DoctorRow>)
+                        doctors.map((doctor, index) => <DoctorRow 
+                        key={doctor._id} 
+                        index={index} 
+                        doctor={doctor} 
+                        refetch={refetch}
+                        ></DoctorRow>)
                     }
                     
                     </tbody>
                 </table>
             </div>
-            
         </div>
     );
 };

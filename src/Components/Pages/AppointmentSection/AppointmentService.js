@@ -4,7 +4,7 @@ import React from 'react';
 const AppointmentService = ({service, date, setTreatment}) => {
     const {title, slots, price} = service;
     return (
-        <div className="card  lg:max-w-lg shadow-xl bg-primary mb-20">
+        <div className="card  lg:max-w-lg shadow-xl bg-slate-800 mb-20">
             <div className="card-body items-center text-center">
               <h2 className="card-title">{title}</h2>
               <p>{format(date, "PP")}</p>

@@ -16,6 +16,7 @@ const Login = () => {
   const location = useLocation();
   const [token] = useToken(user || gUser);
   let from = location.state?.from?.pathname || "/";
+
   
   useEffect(()=>{
     if (token) {
@@ -23,14 +24,16 @@ const Login = () => {
     }
   }, [token, from, navigate]);
 
+  if (loading || sending || gLoading) {
+    return <LoadingSpinner></LoadingSpinner>;
+  }
+
   let signError;
   if (error || resetError || gError) {
     signError = <p className="text-red-500">Error: {error?.message} {resetError?.message}</p>;
   }
 
-  if (loading || sending || gLoading) {
-    return <LoadingSpinner></LoadingSpinner>;
-  }
+
 
   const onSubmit = data => {
     signInWithEmailAndPassword(data.email, data.password);
@@ -48,10 +51,10 @@ const Login = () => {
  
 
   return (
-    <div className="flex justify-center items-center h-screen mb-20 mt-20">
+    <div className="flex justify-center items-center mb-20 mt-20">
       <div className="w-96 bg-base-100 shadow-xl">
 
-        <div className="card-body">
+        <div className="card-body bg-slate-300 rounded-md">
         <h1 className="text-center text-3xl">Login</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
             <div className="form-control">
@@ -74,8 +77,8 @@ const Login = () => {
                 placeholder="email"
                 className="input input-bordered"
               />
-              {errors.email?.type === 'required' && <span className="text-red">{errors.email?.message}</span>}
-              {errors.email?.type === 'pattern' && <span className="text-red">{errors.email?.message}</span>}
+              {errors.email?.type === 'required' && <span className="text-red-500">{errors.email?.message}</span>}
+              {errors.email?.type === 'pattern' && <span className="text-red-500">{errors.email?.message}</span>}
             </div>
             <div className="form-control">
               <label className="label">
@@ -97,22 +100,22 @@ const Login = () => {
                 placeholder="Password"
                 className="input input-bordered"
               />
-              {errors.password?.type === 'required' && <span className="text-primary">{errors.password?.message}</span>}
-              {errors.password?.type === 'minLength' && <span className="text-primary">{errors.password?.message}</span>}
+              {errors.password?.type === 'required' && <span className="text-red-500">{errors.password?.message}</span>}
+              {errors.password?.type === 'minLength' && <span className="text-red-500">{errors.password?.message}</span>}
             </div>
            
             
               {signError}
             <div className="form-control mt-6">
-              <button type="submit" className="btn btn-primary">Login</button>
+              <button type="submit" className="btn bg-slate-800">Login</button>
             </div>
           
         </form>
-        <p>Forgot password? <button className="btn btn-link" onClick={handleResetPassword}>reset password</button></p>
+        <p>Forgot password? <span className="text-warning" onClick={handleResetPassword}>reset password</span></p>
         <p>New to Doctors Portal? <Link className="text-primary" to='/register'>create account</Link> </p>
         <div className="divider">OR</div>
         <div className="flex justify-center items-center">
-          <button onClick={() => signInWithGoogle()} className="btn btn-primary">
+          <button onClick={() => signInWithGoogle()} className="btn bg-slate-800">
               Sign in with Google
           </button>
         </div>

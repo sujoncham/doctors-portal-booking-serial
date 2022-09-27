@@ -7,7 +7,7 @@ const [admin, setAdmin] = useState(false);
 useEffect(()=>{
     const email = user?.email;
     if(email){
-        fetch(`http://localhost:5000/admin/${email}`, {
+        fetch(`https://doctors-portal-server-7ten.vercel.app/admin/${email}`, {
       method: 'GET',
       headers:{
         authorization: `Bearer ${localStorage.getItem('accessToken')}`

@@ -1,11 +1,13 @@
 import React from "react";
 import { toast } from "react-toastify";
 
-const DoctorRow = ({ doctor, Index, setDoctors }) => {
+const DoctorRow = ({ doctor, index, refetch }) => {
   const { name, email, speciality, img } = doctor;
 
   const handleDelete = (email) => {
-    fetch(`http://localhost:5000/doctor/${email}`, {
+    const confirmDelete = window.confirm('Are you want to delete this doctor?');
+    if(confirmDelete){
+      fetch(`https://doctors-portal-server-7ten.vercel.app/doctor/${email}`, {
       method: "DELETE",
       headers:{
         authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -15,16 +17,18 @@ const DoctorRow = ({ doctor, Index, setDoctors }) => {
       .then((result) => {
         if (result.deletedCount) {
           toast(`Doctor: ${name} is delete`);
-          setDoctors('');
+          refetch();
         }
       });
+    }
   };
+
   return (
     <tr>
-      <th>{Index + 1}</th>
+      <td>{index + 1}</td>
       <td>
-        <div class="avatar">
-          <div class="w-16 rounded">
+        <div className="avatar">
+          <div className="w-16 rounded">
             <img src={img} alt={doctor.name} />
           </div>
         </div>

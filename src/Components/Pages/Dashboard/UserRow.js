@@ -5,7 +5,7 @@ const UserRow = ({user, index, refetch}) => {
     const {email, role} = user;
 
 const handleMakeAdmin = () =>{
-  fetch(`http://localhost:5000/user/admin/${email}`, {
+  fetch(`https://doctors-portal-server-7ten.vercel.app/user/admin/${email}`, {
     method: 'PUT', 
     headers:{
       authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -28,7 +28,7 @@ const handleMakeAdmin = () =>{
 
   return (
     <tr>
-      <th>{index}</th>
+      <td>{index + 1}</td>
       <td>{email}</td>
       <td>
         {role !== 'admin' && <button onClick={handleMakeAdmin} className="btn btn-sm">Make Admin</button>}

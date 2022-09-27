@@ -4,20 +4,22 @@ import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import About from "./Components/Pages/About";
 import Appointment from "./Components/Pages/Appointment";
-import Payment from "./Components/Pages/AppointmentSection/Payment";
 import Login from "./Components/Pages/AuthenticateUser/Login";
 import Register from "./Components/Pages/AuthenticateUser/Register";
 import RequireAdmin from "./Components/Pages/AuthenticateUser/RequireAdmin";
 import RequireAuth from "./Components/Pages/AuthenticateUser/RequireAuth";
 import Contact from "./Components/Pages/Contact";
 import AddDoctor from "./Components/Pages/Dashboard/AddDoctor";
+import CheckoutForm from "./Components/Pages/Dashboard/CheckoutForm";
 import Dashboard from "./Components/Pages/Dashboard/Dashboard";
 import ManageDoctors from "./Components/Pages/Dashboard/ManageDoctors";
 import MyAppointment from "./Components/Pages/Dashboard/MyAppointment";
 import MyHistory from "./Components/Pages/Dashboard/MyHistory";
 import MyReviews from "./Components/Pages/Dashboard/MyReviews";
+import Payment from "./Components/Pages/Dashboard/Payment";
 import Users from "./Components/Pages/Dashboard/Users";
 import Home from "./Components/Pages/Home";
+import MyPatient from "./Components/Pages/MyPatient";
 import Page404 from "./Components/Pages/Page404";
 import Reviews from "./Components/Pages/Reviews";
 import Footer from "./Components/Shared/Footer/Footer";
@@ -52,9 +54,11 @@ function App() {
           <Route path="addDoctor" element={<AddDoctor></AddDoctor>}></Route>
           <Route path="manageDoctors" element={<ManageDoctors></ManageDoctors>}></Route>
           <Route path="payment/:payId" element={<Payment></Payment>}></Route>
+          <Route path="checkoutForm" element={<CheckoutForm></CheckoutForm>}></Route>
         </Route>
 
         <Route path="/contact" element={<Contact></Contact>}></Route>
+        <Route path="/myPatient" element={<MyPatient></MyPatient>}></Route>
         <Route path="/login" element={<Login></Login>}></Route>
         <Route path="/register" element={<Register></Register>}></Route>
         <Route path="*" element={<Page404></Page404>}></Route>
