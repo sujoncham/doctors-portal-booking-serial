@@ -22,6 +22,9 @@ import Home from "./Components/Pages/Home";
 import MyPatient from "./Components/Pages/MyPatient";
 import Page404 from "./Components/Pages/Page404";
 import Reviews from "./Components/Pages/Reviews";
+import AdvancedVirtual from "./Components/ProductsComponents/ProductFeatures/AdvancedVirtual";
+import RemoteProduct from "./Components/ProductsComponents/ProductFeatures/RemoteProduct";
+import UniqueOrchestra from "./Components/ProductsComponents/ProductFeatures/UniqueOrchestra";
 import Footer from "./Components/Shared/Footer/Footer";
 import Header from "./Components/Shared/Header/Header";
 
@@ -40,7 +43,6 @@ function App() {
             </RequireAuth>
           }
         ></Route>
-        <Route path="/reviews" element={<Reviews></Reviews>}></Route>
 
         <Route path="/dashboard" element={
           <RequireAuth>
@@ -55,6 +57,12 @@ function App() {
           <Route path="manageDoctors" element={<ManageDoctors></ManageDoctors>}></Route>
           <Route path="payment/:payId" element={<Payment></Payment>}></Route>
           <Route path="checkoutForm" element={<CheckoutForm></CheckoutForm>}></Route>
+        </Route>
+        <Route path='reviews' element={<Reviews />}>
+          <Route index element={<AdvancedVirtual />} />
+          <Route path='advancedVirtual' element={<AdvancedVirtual />} />
+          <Route path='uniqueOrchestra' element={<UniqueOrchestra />} />
+          <Route path='remoteProduct' element={<RemoteProduct />} />
         </Route>
 
         <Route path="/contact" element={<Contact></Contact>}></Route>
