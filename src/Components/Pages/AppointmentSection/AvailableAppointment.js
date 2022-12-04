@@ -9,7 +9,7 @@ const AvailableAppointment = ({ date }) => {
   const [treatment, setTreatment] = useState(null);
   // const formatDate = format(date, 'PP');
 
-  const {isLoading, data:services, refetch} = useQuery(['available'], ()=>fetch(`https://doctors-portal-server-7ten.vercel.app/available`)
+  const {isLoading, data:services, refetch} = useQuery(['available'], ()=>fetch(`https://doctors-portal-server-81lp.onrender.com/available`)
       .then((res) => res.json()))
 
       if (isLoading) {

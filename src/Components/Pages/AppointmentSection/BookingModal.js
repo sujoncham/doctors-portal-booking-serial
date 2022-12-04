@@ -22,7 +22,7 @@ const BookingModal = ({ treatment, date, setTreatment, refetch }) => {
       phone: event.target.phone.value,
     };
 
-    const url = `https://doctors-portal-server-7ten.vercel.app/booking`;
+    const url = `https://doctors-portal-server-81lp.onrender.com/booking`;
     fetch(url, {
       method: "POST",
       headers: {

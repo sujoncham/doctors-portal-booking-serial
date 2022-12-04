@@ -7,7 +7,7 @@ const DoctorRow = ({ doctor, index, refetch }) => {
   const handleDelete = (email) => {
     const confirmDelete = window.confirm('Are you want to delete this doctor?');
     if(confirmDelete){
-      fetch(`https://doctors-portal-server-7ten.vercel.app/doctor/${email}`, {
+      fetch(`https://doctors-portal-server-81lp.onrender.com/doctor/${email}`, {
       method: "DELETE",
       headers:{
         authorization: `Bearer ${localStorage.getItem('accessToken')}`

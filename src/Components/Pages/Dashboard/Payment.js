@@ -13,7 +13,7 @@ const stripePromise = loadStripe(
 const Payment = () => {
   const { payId } = useParams();
 
-  const url = `https://doctors-portal-server-7ten.vercel.app/booking/${payId}`;
+  const url = `https://doctors-portal-server-81lp.onrender.com/booking/${payId}`;
   const { data: appointment, isLoading } = useQuery(["booking", payId], () =>
     fetch(url, {
       method:'GET',

@@ -13,7 +13,7 @@ const CheckoutForm = ({appointment}) => {
   const { _id, price, patient, patientName} = appointment;
 
   useEffect(()=>{
-    fetch('https://doctors-portal-server-7ten.vercel.app/create-payment-intent', {
+    fetch('https://doctors-portal-server-81lp.onrender.com/create-payment-intent', {
       method: 'POST',
        headers:{
          'content-type': 'application/json',
@@ -77,7 +77,7 @@ const CheckoutForm = ({appointment}) => {
         }
         
         
-        fetch(`https://doctors-portal-server-7ten.vercel.app/booking/${_id}`, {
+        fetch(`https://doctors-portal-server-81lp.onrender.com/booking/${_id}`, {
           method: 'PATCH',
           headers:{
             'content-type': 'application/json',

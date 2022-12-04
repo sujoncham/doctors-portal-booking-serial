@@ -5,7 +5,7 @@ const UserRow = ({user, index, refetch}) => {
     const {email, role} = user;
 
 const handleMakeAdmin = () =>{
-  fetch(`https://doctors-portal-server-7ten.vercel.app/user/admin/${email}`, {
+  fetch(`https://doctors-portal-server-81lp.onrender.com/user/admin/${email}`, {
     method: 'PUT', 
     headers:{
       authorization: `Bearer ${localStorage.getItem('accessToken')}`

@@ -6,7 +6,7 @@ import DoctorRow from "./DoctorRow";
 const ManageDoctors = () => {
  
     const { data: doctors, isLoading, refetch } = useQuery(['doctors'], () =>
-    fetch('https://doctors-portal-server-7ten.vercel.app/doctor', {
+    fetch('https://doctors-portal-server-81lp.onrender.com/doctor', {
         method: "GET",
         headers:{
             authorization: `Bearer ${localStorage.getItem('accessToken')}`

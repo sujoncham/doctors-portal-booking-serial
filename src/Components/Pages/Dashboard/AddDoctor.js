@@ -9,7 +9,7 @@ import LoadingSpinner from '../../Shared/LoadingSpinner';
 const AddDoctor = () => {
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
 
-    const {data:services, isLoading} = useQuery(['services'], ()=>fetch('https://doctors-portal-server-7ten.vercel.app/service').then(res=>res.json()));
+    const {data:services, isLoading} = useQuery(['services'], ()=>fetch('https://doctors-portal-server-81lp.onrender.com/service').then(res=>res.json()));
     if(isLoading){
         return <LoadingSpinner></LoadingSpinner>
     }
@@ -39,7 +39,7 @@ const AddDoctor = () => {
                     img:img
                 }
 
-                fetch('https://doctors-portal-server-7ten.vercel.app/doctor', {
+                fetch('https://doctors-portal-server-81lp.onrender.com/doctor', {
                     method:'POST',
                     headers:{
                         'content-type':'application/json',

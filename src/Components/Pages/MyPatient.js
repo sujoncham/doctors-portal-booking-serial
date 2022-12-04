@@ -8,7 +8,7 @@ const MyPatient = () => {
     const [user] = useAuthState(auth);
 
     const { data: doctors, isLoading } = useQuery(['doctors'], () =>
-    fetch(`https://doctors-portal-server-7ten.vercel.app/doctor?docotr=${user?.email}`, {
+    fetch(`https://doctors-portal-server-81lp.onrender.com/doctor?docotr=${user?.email}`, {
         method: "GET",
         headers:{
             'content-type': 'application/json',
