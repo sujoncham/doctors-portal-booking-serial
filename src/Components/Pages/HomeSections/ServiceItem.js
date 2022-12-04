@@ -13,8 +13,8 @@ const ServiceItem = () => {
     ]
 
     return (
-        <div className='justify-center items-center px-20'>
-            <div className='text-center'>
+        <div className='justify-center items-center px-20 py-10'>
+            <div className='text-center mb-10'>
                 <h1 className='text-3xl font-bold uppercase'>Our Services</h1>
                 <p>We provide services</p>
             </div>
@@ -22,8 +22,7 @@ const ServiceItem = () => {
             {
                 serviceData.map(data => <InnerService key={data.id} data={data}></InnerService>)
             }
-            </div>
-                
+            </div>  
         </div>
     );
 };

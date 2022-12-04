@@ -4,7 +4,7 @@ import ButtonPrimary from "../../../SharedButton/ButtonPrimary";
 
 const Banner = () => {
   return (
-    <div className="hero min-h-screen mb-5">
+    <div className="hero py-10">
       <div className="hero-content flex-col lg:flex-row-reverse">
         <img src={Chair} className="max-w-2xl rounded-lg shadow-2xl" alt="" />
         <div>

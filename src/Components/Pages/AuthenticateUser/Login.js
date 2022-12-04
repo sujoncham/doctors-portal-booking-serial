@@ -100,8 +100,8 @@ const Login = () => {
                 placeholder="Password"
                 className="input input-bordered"
               />
-              {errors.password?.type === 'required' && <span className="text-red-500">{errors.password?.message}</span>}
-              {errors.password?.type === 'minLength' && <span className="text-red-500">{errors.password?.message}</span>}
+              {errors.password?.type === 'required' && <span className="text-red-600">{errors.password?.message}</span>}
+              {errors.password?.type === 'minLength' && <span className="text-red-600">{errors.password?.message}</span>}
             </div>
            
             
@@ -111,8 +111,8 @@ const Login = () => {
             </div>
           
         </form>
-        <p>Forgot password? <span className="text-warning" onClick={handleResetPassword}>reset password</span></p>
-        <p>New to Doctors Portal? <Link className="text-primary" to='/register'>create account</Link> </p>
+        <p>Forgot password? <span className="text-[#f80]" onClick={handleResetPassword}>reset password</span></p>
+        <p>New to Doctors Portal? <Link className="text-[#f80]" to='/register'>create account</Link> </p>
         <div className="divider">OR</div>
         <div className="flex justify-center items-center">
           <button onClick={() => signInWithGoogle()} className="btn bg-slate-800">
